@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap">
+    <title>Linux 101</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #4caf50 3px solid; /* Change to green */
+        }
+        header h1 {
+            font-family: 'Fira Code', monospace;
+            font-size: 4vw;
+            margin: 0;
+            text-align: center;
+            padding-bottom: 10px;
+            background: linear-gradient(to top right, #4caf50, #00bcd4); /* Change to green + turquoise */
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            font-family: 'Fira Code', monospace;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        nav li {
+            padding: 5px 20px;
+            margin: 10px 10px;
+            cursor: pointer;
+            color: #333;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+			display: flex;
+			align-items: center;
+			justify-content:center;	
+			border-radius: 5px;
+        }
+        nav li:hover {
+            background: #4caf50; /* Change to green */
+            color: #fff;
+            border-radius: 5px;
+        }
+        nav li.active {
+            background: #4caf50; /* Change to green */
+            color: #fff;
+            border-radius: 5px;
+        }
+        .content {
+            display: none;
+        }
+        .content.active {
+            display: block;
+        }
+        h2 {
+            color: #4caf50; /* Change to green */
+        }
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        body.dark-mode .container {
+            background-color: #444;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        body.dark-mode header {
+            background: #222;
+            border-bottom: #4caf50 3px solid;
+        }
+
+        body.dark-mode header h1 {
+            background: linear-gradient(to top right, #4caf50, #00bcd4);
+			color: black;
+        }
+
+        body.dark-mode nav {
+            background: #222;
+        }
+
+        body.dark-mode nav li {
+            color: #fff;
+        }
+
+        body.dark-mode nav li:hover {
+            background: #4caf50;
+        }
+
+        body.dark-mode .content {
+            color: #ddd;
+        }
+
+        body.dark-mode h2 {
+            color: #4caf50;
+        }
+
+        body.dark-mode .mermaid .node rect {
+            fill: #444;
+            stroke: #555;
+        }
+
+        body.dark-mode .mermaid .edgePath path {
+            stroke: #ddd;
+        }
+		
+		nav{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: .5rem;
+		}
+		#theme-toggle{
+			padding: 5px 20px;
+			font-family: 'Fira Code', monospace;
+			font-size: 2vh;
+			font-weight: bolder;
+		}
+		a{
+			color: hotpink;
+		}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Linux 101</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li onclick="showContent('story')">Story</li>
+            <li onclick="showContent('faq')">FAQ</li>
+            <li onclick="showContent('why-linux')">Why Linux</li>
+            <li onclick="showContent('history')">About</li>
+        </ul>
+        <button id="theme-toggle">Change Theme</button>
+    </nav>
+
+    <div class="container">
+        <div id="history" class="content">
+            <h2>History of Linux</h2>
+            <p>Linux was created in 1991 by Linus Torvalds, a Finnish computer science student. It was inspired by MINIX, a small UNIX-like operating system developed by Andrew S. Tanenbaum. Torvalds wanted to create a free, open-source alternative to MINIX.</p>
+            <p>The Linux kernel, combined with GNU software, quickly gained popularity among developers and enthusiasts. Over time, it evolved into a robust, versatile, and widely-used operating system powering everything from smartphones to supercomputers.</p>
+        </div>
+		
+		        <div id="why-linux" class="content">
+            <h2>Why Choose Linux?</h2>
+            <ul>
+                <li>Open-source and free: Linux is freely available and can be redistributed.</li>
+                <li>Stability: Linux systems are known for their stability and reliability.</li>
+                <li>Security: With its open-source nature, vulnerabilities are quickly identified and fixed.</li>
+                <li>Customization: Linux offers extensive customization options.</li>
+                <li>Variety: There are numerous Linux distributions to choose from, catering to different needs.</li>
+                <li>Community support: A large, active community provides support and develops software.</li>
+            </ul>
+        </div>
+
+        <div id="faq" class="content">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>What is Unix?</h3>
+            <p>Unix is an operating system developed in the 1970s at Bell Labs. It includes the kernel (core of the operating system), file systems, device drivers, and various utilities and applications.</p>
+
+            <h3>What is Linux?</h3>
+            <p>Linux is a free, open-source operating system kernel initially created by Linus Torvalds. When combined with GNU utilities and other software, it forms a complete operating system often referred to as GNU/Linux.</p>
+
+            <h3>How are Unix and Linux related?</h3>
+            <p>Linux was inspired by Unix but developed independently. It's considered a "Unix-like" operating system, following many Unix design principles and implementing the POSIX standard.</p>
+
+<!-- https://claude.site/artifacts/1f08d2de-c156-4190-a5cd-52eed197617f -->
+
+            <h3>How do Unix, Linux, and various shells relate to each other?</h3>
+        <div class="mermaid">
+		
+		graph TD
+    A[Unix]
+    B[Linux]
+    
+    C[Unix Kernel]
+    D[Unix Shell]
+    G[Linux Kernel]
+    H[GNU Utilities]
+    
+    A -.->|Inspired| B
+    A --> C
+    A --> D
+    D --> E[Bash]
+    D --> F[Other Unix Shells]
+    
+    B --> G
+    B --> H
+    B -.->|Implementation of Unix Shell| D
+
+    subgraph Unix Components
+        C
+        D
+    end
+    
+    subgraph Linux Components
+        G
+        H
+    end>   <!-- if i remove this > then the below two also get error if i keep it then only this gets error-->
+		</div>
+	<a style="color: hotpink; font-size: 1rem;"target="_blank" href="https://claude.site/artifacts/1f08d2de-c156-4190-a5cd-52eed197617f">See the above diagram here if failed to load</a>
+            <h3>How do iOS, macOS, Android, and Linux relate to each other?</h3>
+            <div class="mermaid">
+                graph TD
+                    A[Unix] --> B[BSD Unix]
+                    A --> C[System V Unix]
+                    B --> D[Darwin]
+                    D --> E[macOS]
+                    D --> F[iOS]
+                    G[Linux Kernel] --> H[Android]
+                    G --> I[Other Linux Distributions]
+                    J[GNU Project] --> K[GNU/Linux]
+                    G --> K
+                    A -.-> |Inspired| G
+                    L[NeXTSTEP] --> D
+            </div>
+
+            <h3>How do I install Linux on a Windows 7 PC?</h3>
+            <div class="mermaid">
+                graph TD
+                    A[Start] --> B[Download Linux ISO]
+                    B --> C[Create Bootable DVD]
+                    C --> D[Back Up Important Data]
+                    D --> E[Partition Hard Drive]
+                    E --> F[Boot from DVD]
+                    F --> G[Install Linux]
+                    G --> H[Set Up User Account]
+                    H --> I[Install Updates]
+                    I --> J[Install Additional Software]
+                    J --> K[Enjoy Linux!]
+            </div>
+        </div>
+
+        <div id="story" class="content">
+            <h2>Story</h2>
+            <p>The Unix operating system was initially developed in 1969 and written in assembly language. It was officially released in 1971, with a new version written in C language released in 1973. Unix is notable for its structure, which includes two main parts: the kernel and the shell.</p>
+            <p>The kernel is responsible for executing the commands issued through the shell, which serves as the user interface. The kernel can be thought of as the "brain" of the computer, handling all critical operations, while the shell is the "face" that interacts with users.</p>
+            <p>The Unix shell has many versions, with the original being the Bourne shell. Subsequent versions include the Bourne Again Shell (bash), Z shell (zsh), and C shell (csh). These variations were created to cater to different user preferences, similar to how some users prefer dark mode on their devices while others prefer light mode.</p>
+            <p>In 1991, Linus Torvalds developed Linux, which has its own kernel but incorporates Unix shell implementations (initially the Bourne shell). Linux has been a tremendous success, now used in 95% of servers globally, and forms the basis of the Android operating system.</p>
+            <p>To start using Linux, follow the installation instructions provided here: <a href="https://claude.site/artifacts/d3da5a64-73ba-4531-bf9a-69df045be07a">Installation Diagram</a>.</p>
+            <p>For Windows 7 users who cannot use virtual machines or the Windows Subsystem for Linux, and if a USB drive is not available for live booting, creating a dual boot system is recommended. Detailed steps for creating a dual boot system are available here: <a href="https://claude.site/artifacts/3e718f46-3373-4c00-a3ca-57322f567a3e">Dual Boot System Guide</a>.</p>
+            <p>For those concerned about data loss or disk corruption, Git Bash is an alternative. Git Bash provides a Unix-like shell environment for Windows. To use it, search for "git vcs" and download the version suitable for your machine (32-bit or 64-bit). While it doesn't offer the full features of a Linux environment, it allows you to execute many Linux commands, which can help you get started with Unix-based commands.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showContent('story');
+
+            // Check for saved theme preference
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+
+        function showContent(contentId) {
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.querySelectorAll('nav li').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.getElementById(contentId).classList.add('active');
+            document.querySelector(`nav li[onclick="showContent('${contentId}')"]`).classList.add('active');
+        }
+
+        // Toggle Dark Mode
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            // Save theme preference
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true
+    }
+});
+    </script>
+    </script>
+</body>
+</html>
